@@ -12,6 +12,9 @@ services:
       - .:/var/www/html
     depends_on:
       - mysql
+    networks:
+      krayin_network:
+        ipv4_address: 172.19.0.3  
 
   mysql:
     image: mysql:5.7.23
@@ -23,6 +26,16 @@ services:
       MYSQL_ROOT_PASSWORD: Flip123@
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      krayin_network:
+        ipv4_address: 172.19.0.2 
 
 volumes:
   mysql_data:
+
+networks:
+  krayin_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16 
