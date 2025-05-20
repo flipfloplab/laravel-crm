@@ -1,5 +1,3 @@
-
-
 echo "Aguardando o MySQL ficar disponível..."
 until nc -z -v -w30 krayin_mysql 3306
 do
@@ -9,11 +7,14 @@ done
 
 echo "MySQL está pronto - executando comandos de inicialização..."
 
-
-
 INSTALLED=$(mysql --skip-ssl -h krayin_mysql -u root -p"Flip123@" -D laravel-crm -e "SHOW TABLES LIKE 'core_config';" | grep core_config)
 
-if [ -z "$INSTALLED" ]; then
+echo "INSTALLED=$INSTALLED"
+
+if echo "$INSTALLED" | grep -q "core_config"; then
+  echo "Krayin já está instalado. Pulando instalação..."
+else
+  echo "Krayin ainda não instalado. Executando instalação..."
   composer install
 
   composer create-project ...
@@ -29,11 +30,7 @@ if [ -z "$INSTALLED" ]; then
   composer require krayin/rest-api -vvv
 
   php artisan krayin-rest-api:install 
-  echo "Krayin ainda não instalado. Executando instalação..."
-else
-  echo "Krayin já está instalado. Pulando instalação..."
 fi
-
 
 php artisan serve --host=0.0.0.0 --port=8000
 
