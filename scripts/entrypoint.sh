@@ -60,10 +60,7 @@ else
   echo "\033[1;33m-> php artisan db:seed\033[0m"
   php artisan db:seed
 
-  
 fi
-  
-sed -i 's|$this->components->info("Server running on \[http://{$this->host()}:{$this->port()}\].");|$this->components->info("🔥 Server running on: http://tenant1.localhost:{$this->port()}/admin/login 🚀");|' vendor/laravel/framework/src/Illuminate/Foundation/Console/ServeCommand.php
 
 php artisan serve --host=0.0.0.0 --port=8000
 
