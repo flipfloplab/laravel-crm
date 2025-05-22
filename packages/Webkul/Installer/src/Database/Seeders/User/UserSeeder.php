@@ -21,14 +21,15 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'id'              => 1,
             'name'            => 'Example Admin',
-            'email'           => 'admin@example.com',
-            'password'        => bcrypt('admin123'),
+            'email'           => 'flip@example.com',
+            'password'        => bcrypt('Flip123@'),
             // 'api_token'       => Str::random(80),
             'created_at'      => date('Y-m-d H:i:s'),
             'updated_at'      => date('Y-m-d H:i:s'),
             'status'          => 1,
             'role_id'         => 1,
             'view_permission' => 'global',
+            'tenant_id' => '1',
         ]);
     }
 }
